@@ -44,7 +44,7 @@ const socialLinks = [
   {
     label: 'Instagram',
     href: 'https://www.instagram.com/inmobiliariasmmiv/',
-    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.7" r="1.1" fill="currentColor"/></svg>'
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.4" cy="6.7" r="1.1" fill="currentColor"/></svg>'
   },
   {
     label: 'Facebook',
@@ -52,23 +52,23 @@ const socialLinks = [
     svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.7 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.6 1.7-1.6H17V3.8c-.4-.1-1.3-.2-2.3-.2-2.3 0-3.9 1.4-3.9 4.1V10H8.2v3h2.6v8h2.9z" fill="currentColor"/></svg>'
   },
   {
-    label: 'Correo electrónico',
+    label: 'Correo',
     href: 'mailto:melecio.maldonado@solucionesmmiv.mx',
-    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 7l7.5 6 7.5-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M4.5 7l7.5 6 7.5-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   },
   {
-    label: 'WhatsApp Melecio',
+    label: 'Melecio',
     href: 'https://wa.me/525578410283?text=Hola,%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20venta%20y/o%20renta%20de%20propiedades.',
     svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.8a8.1 8.1 0 0 1-12 7.1L4 20l1.1-4a8.1 8.1 0 1 1 15.1-4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.1c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.1.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.2.6 0l.8-.9c.2-.2.4-.2.7-.1l1.8.9c.3.1.4.3.4.5 0 .5-.3 1.4-.8 1.8-.5.4-1.2.7-2 .6-1.1-.1-2.6-.5-4.4-2.1-2.2-1.9-3.6-4.3-3.7-5.4-.1-.7.1-1.3.5-1.7z" fill="currentColor"/></svg>'
   },
   {
-    label: 'WhatsApp Marisol',
+    label: 'Marisol',
     href: 'https://wa.me/5547600102?text=Hola,%20me%20interesa%20recibir%20informaci%C3%B3n%20sobre%20venta%20y/o%20renta%20de%20propiedades.',
     svg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 11.8a8.1 8.1 0 0 1-12 7.1L4 20l1.1-4a8.1 8.1 0 1 1 15.1-4.2z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 8.1c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.8 1.8c.1.3.1.5-.1.7l-.6.7c-.2.2-.1.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.2.6 0l.8-.9c.2-.2.4-.2.7-.1l1.8.9c.3.1.4.3.4.5 0 .5-.3 1.4-.8 1.8-.5.4-1.2.7-2 .6-1.1-.1-2.6-.5-4.4-2.1-2.2-1.9-3.6-4.3-3.7-5.4-.1-.7.1-1.3.5-1.7z" fill="currentColor"/></svg>'
   }
 ];
 
-const createSocialBar = (className) => {
+const createSocialBar = (className, showLabels = false) => {
   const nav = document.createElement('nav');
   nav.className = className;
   nav.setAttribute('aria-label', 'Redes sociales y contacto');
@@ -81,15 +81,15 @@ const createSocialBar = (className) => {
       link.target = '_blank';
       link.rel = 'noopener';
     }
-    link.innerHTML = item.svg;
+    link.innerHTML = `<span class="social-icon">${item.svg}</span>${showLabels ? `<span class="social-label">${item.label}</span>` : ''}`;
     nav.appendChild(link);
   });
   return nav;
 };
 
-const hero = document.querySelector('.hero.hero-mmiv-original');
-if (hero && !hero.querySelector('.hero-social')) {
-  hero.appendChild(createSocialBar('hero-social'));
+const navWrap = document.querySelector('.site-header .nav-wrap');
+if (navWrap && !navWrap.querySelector('.header-social')) {
+  navWrap.appendChild(createSocialBar('header-social', true));
 }
 
 const footerSocial = document.querySelector('.footer-social');
@@ -103,20 +103,52 @@ if (brandLogo) {
   brandLogo.style.objectFit = 'contain';
   brandLogo.style.objectPosition = 'center';
   brandLogo.style.width = 'auto';
-  brandLogo.style.maxWidth = '220px';
-  brandLogo.style.height = '68px';
-  brandLogo.style.maxHeight = '68px';
+  brandLogo.style.height = '104px';
+  brandLogo.style.maxHeight = '104px';
+  brandLogo.style.maxWidth = '300px';
 }
 
 const socialStyle = document.createElement('style');
 socialStyle.textContent = `
-  .hero-social{position:absolute;right:46px;top:124px;z-index:3;display:flex;gap:10px}
-  .hero-social a,.footer-social a{width:40px;height:40px;border:1px solid rgba(255,255,255,.62);border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;transition:background .2s ease,transform .2s ease,border-color .2s ease}
-  .hero-social a:hover,.footer-social a:hover{background:rgba(255,255,255,.14);border-color:#fff;transform:translateY(-2px)}
-  .hero-social svg,.footer-social svg{width:19px;height:19px;display:block}
+  .site-header{height:132px!important;background:rgba(250,248,243,.97)!important}
+  .site-header .nav-wrap{width:min(1440px,calc(100% - 56px))!important;display:grid!important;grid-template-columns:auto 1fr auto!important;gap:34px!important;align-items:center!important}
+  .brand{display:flex;align-items:center;min-width:250px}
+  .brand img{width:auto!important;height:104px!important;max-height:104px!important;max-width:300px!important;object-fit:contain!important;object-position:center!important}
+  .main-nav{justify-self:center;gap:25px!important}
+  .main-nav a{font-size:.66rem!important}
+  .header-social{display:flex;align-items:flex-start;gap:12px;justify-self:end}
+  .header-social a{min-width:52px;display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;color:#17333a;font-size:.59rem;font-weight:600;line-height:1;text-align:center}
+  .social-icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;box-shadow:0 4px 12px rgba(15,40,48,.12);transition:transform .2s ease,box-shadow .2s ease}
+  .header-social a:hover .social-icon{transform:translateY(-2px);box-shadow:0 7px 16px rgba(15,40,48,.18)}
+  .header-social a:nth-child(1) .social-icon{background:linear-gradient(135deg,#f9ce34 0%,#ee2a7b 45%,#6228d7 100%)}
+  .header-social a:nth-child(2) .social-icon{background:#1877f2}
+  .header-social a:nth-child(3) .social-icon{background:#97258f}
+  .header-social a:nth-child(4) .social-icon,.header-social a:nth-child(5) .social-icon{background:#20b85a}
+  .header-social svg{width:23px;height:23px;display:block}
   .footer-social{display:flex;gap:10px}
-  @media(max-width:900px){.hero-social{right:24px;top:112px}}
-  @media(max-width:600px){.hero-social{left:15px;right:auto;top:92px;gap:7px}.hero-social a{width:36px;height:36px}.hero-social svg{width:17px;height:17px}.brand img{width:auto!important;height:58px!important;max-height:58px!important;max-width:180px!important}}
+  .footer-social a{width:40px;height:40px;border:1px solid rgba(255,255,255,.55);border-radius:50%;display:grid;place-items:center;color:#fff;text-decoration:none;transition:background .2s ease,transform .2s ease}
+  .footer-social a:hover{background:rgba(255,255,255,.14);transform:translateY(-2px)}
+  .footer-social .social-icon{width:auto;height:auto;border-radius:0;background:none!important;box-shadow:none}
+  .footer-social svg{width:19px;height:19px;display:block}
+  .hero.hero-mmiv-original .hero-shell{padding-top:205px!important}
+  @media(max-width:1250px){
+    .site-header{height:112px!important}
+    .site-header .nav-wrap{width:min(1180px,calc(100% - 38px))!important;gap:18px!important}
+    .brand{min-width:190px}.brand img{height:86px!important;max-height:86px!important;max-width:235px!important}
+    .main-nav{gap:17px!important}.main-nav a{font-size:.61rem!important}
+    .header-social{gap:7px}.header-social a{min-width:42px;font-size:.52rem}.social-icon{width:37px;height:37px}.header-social svg{width:19px;height:19px}
+    .hero.hero-mmiv-original .hero-shell{padding-top:185px!important}
+  }
+  @media(max-width:980px){
+    .site-header{height:92px!important}.site-header .nav-wrap{display:flex!important;justify-content:space-between!important}
+    .brand{min-width:0}.brand img{height:72px!important;max-height:72px!important;max-width:205px!important}
+    .header-social{display:none}.main-nav{top:92px!important}.menu-btn{display:block!important}
+    .hero.hero-mmiv-original .hero-shell{padding-top:155px!important}
+  }
+  @media(max-width:600px){
+    .site-header{height:82px!important}.brand img{height:64px!important;max-height:64px!important;max-width:185px!important}.main-nav{top:82px!important}
+    .hero.hero-mmiv-original .hero-shell{padding-top:135px!important}
+  }
 `;
 document.head.appendChild(socialStyle);
 
